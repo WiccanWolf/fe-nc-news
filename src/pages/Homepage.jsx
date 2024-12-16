@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import loki from '../assets/20180816_120800.jpg';
 
 const Homepage = () => {
+  console.log('Rendering Homepage...');
   return (
     <section className="homepage">
       <p>Hello world! Let's build a news site...</p>
