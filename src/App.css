@@ -46,3 +46,8 @@
 .ph-img {
   width: 25%;
 }
+
+ul {
+  justify-content: space-evenly;
+  list-style-type: none;
+}

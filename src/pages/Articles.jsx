@@ -1,25 +1,21 @@
 import axios from 'axios';
 import ArticleCard from './components/ArticleCard';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
-import { useArticlesContext } from './components/contexts/ArticlesContext';
-import { useStatusContext } from './components/contexts/StatusContext';
-import { useURLContext } from './components/contexts/URLContext';
 
-const Articles = () => {
-  const { articles, setArticles } = useArticlesContext();
-  const { isLoading, setLoading, isError, setError } = useStatusContext();
-  const { baseURL } = useURLContext();
+const Articles = ({ baseURL }) => {
+  const [articles, setArticles] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const [isError, setError] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     setError(false);
-
     axios
       .get(`${baseURL}/articles`)
       .then(({ data }) => {
-        setArticles(data.articles || []);
+        setArticles(data.articles);
       })
       .catch((err) => {
         setError(true);
