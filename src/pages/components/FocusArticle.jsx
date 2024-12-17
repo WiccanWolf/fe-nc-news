@@ -3,20 +3,24 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
 import CommentList from './CommentList';
+import { Button } from 'react-bootstrap';
 
 const FocusArticle = ({ baseURL }) => {
   const { article_id } = useParams();
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
+  const [votes, setVotes] = useState(0);
 
   useEffect(() => {
     const fetchArticle = async () => {
       setLoading(true);
       setError(false);
       try {
-        const response = await axios.get(`${baseURL}/articles/${article_id}`);
-        setSelectedArticle(response.data.article || response.data);
+        const response = await axios.get(`${baseURL}articles/${article_id}`);
+        const articleData = response.data.article || response.data;
+        setSelectedArticle(articleData);
+        setVotes(articleData.votes);
       } catch (err) {
         console.error('Error fetching article:', err);
         setError(true);
@@ -24,9 +28,33 @@ const FocusArticle = ({ baseURL }) => {
         setLoading(false);
       }
     };
-
     fetchArticle();
   }, [article_id, baseURL]);
+
+  const handleVoteChange = async (inc_votes) => {
+    setLoading(true);
+    setError(false);
+
+    try {
+      const { data } = await axios.patch(`${baseURL}/articles/${article_id}`, {
+        inc_votes,
+      });
+      setVotes(data.article.votes);
+      setSelectedArticle((prevArticle) => ({
+        ...prevArticle,
+        votes: data.article.votes,
+      }));
+    } catch (err) {
+      setError(true);
+      console.error(
+        'Error updating votes:',
+        err.response ? err.response.data : err.message
+      );
+      alert('Failed to update votes, please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -66,6 +94,11 @@ const FocusArticle = ({ baseURL }) => {
         style={{ maxWidth: '100%' }}
       />
       <p>{selectedArticle.body}</p>
+      <h3>Votes: {votes}</h3>
+      <section className="voting-buttons">
+        <Button onClick={() => handleVoteChange(1)}>Upvote</Button>
+        <Button onClick={() => handleVoteChange(-1)}>Downvote</Button>
+      </section>
       <h3>Comments: </h3>
       <CommentList baseURL={baseURL} selectedArticle={selectedArticle} />
     </section>
