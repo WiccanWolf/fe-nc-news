@@ -47,7 +47,32 @@
   width: 25%;
 }
 
-ul {
-  justify-content: space-evenly;
+ol {
   list-style-type: none;
+  padding: 20px;
+}
+
+ol li {
+  margin-bottom: 15px;
+  padding-left: 20px;
+  text-align: left;
+  border-left: 3px solid #ccc;
+}
+
+ol li h4 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+ol li p {
+  font-size: 1em;
+  line-height: 1.5;
+  margin: 5px 0;
+}
+
+ol li p:last-child {
+  font-size: 0.85em;
+  color: #666;
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
+import CommentList from './CommentList';
 
 const FocusArticle = ({ baseURL }) => {
   const { article_id } = useParams();
@@ -65,6 +66,8 @@ const FocusArticle = ({ baseURL }) => {
         style={{ maxWidth: '100%' }}
       />
       <p>{selectedArticle.body}</p>
+      <h3>Comments: </h3>
+      <CommentList baseURL={baseURL} selectedArticle={selectedArticle} />
     </section>
   );
 };
