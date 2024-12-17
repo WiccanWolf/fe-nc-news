@@ -8,6 +8,7 @@ import Topics from './pages/Topics';
 import { useEffect, useState } from 'react';
 import Login from './pages/components/Login';
 import NavigationMenu from './pages/components/NavigationMenu';
+import TopicDetails from './pages/components/TopicDetails';
 
 const baseURL = 'https://the-wolves-den.onrender.com/api/';
 
@@ -39,6 +40,10 @@ const App = () => {
             }
           />
           <Route path="topics" element={<Topics baseURL={baseURL} />} />
+          <Route
+            path="topics/:slug"
+            element={<TopicDetails baseURL={baseURL} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
