@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
-import { Link } from 'react-router-dom';
+import NewComment from './NewComment';
 
 const CommentList = ({ baseURL, selectedArticle }) => {
   const [isError, setError] = useState(false);
@@ -74,16 +74,23 @@ const CommentList = ({ baseURL, selectedArticle }) => {
   };
 
   return (
-    <ol>
-      {commentList.map((comment) => (
-        <li key={comment.comment_id}>
-          <h4>{comment.author}</h4>
-          <p>{comment.body}</p>
-          <p>Votes: {comment.votes}</p>
-          <p>Created At: {britishify(comment.created_at)}</p>
-        </li>
-      ))}
-    </ol>
+    <>
+      <NewComment
+        article_id={article_id}
+        baseURL={baseURL}
+        setCommentList={setCommentList}
+      />
+      <ol>
+        {commentList.map((comment) => (
+          <li key={comment.comment_id}>
+            <h4>{comment.author}</h4>
+            <p>{comment.body}</p>
+            <p>Votes: {comment.votes}</p>
+            <p>Created At: {britishify(comment.created_at)}</p>
+          </li>
+        ))}
+      </ol>
+    </>
   );
 };
 
