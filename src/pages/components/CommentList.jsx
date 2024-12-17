@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
 import NewComment from './NewComment';
 
-const CommentList = ({ baseURL, selectedArticle }) => {
+const CommentList = ({ baseURL, selectedArticle, isLoggedIn }) => {
   const [isError, setError] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [commentList, setCommentList] = useState([]);
@@ -79,6 +79,9 @@ const CommentList = ({ baseURL, selectedArticle }) => {
         article_id={article_id}
         baseURL={baseURL}
         setCommentList={setCommentList}
+        isLoggedIn={isLoggedIn}
+        username={localStorage.getItem('username')}
+        commentList={commentList}
       />
       <ol>
         {commentList.map((comment) => (

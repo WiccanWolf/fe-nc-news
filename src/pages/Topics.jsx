@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { ThreeDots } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 
@@ -68,7 +69,9 @@ const Topics = ({ baseURL }) => {
           );
         })}
       </ul>
-      <Link to="/">Return to Homepage</Link>
+      <Link to="/">
+        <Button variant="outline-dark">Return to Home Page</Button>
+      </Link>
     </section>
   );
 };

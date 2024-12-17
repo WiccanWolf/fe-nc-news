@@ -1,16 +1,16 @@
-import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 
 const NavigationMenu = () => {
   return (
-    <>
-      <Link to="/articles">
-        <Button variant="outline-info">View Articles</Button>
-      </Link>
-      <Link to="/topics">
-        <Button variant="outline-info">View Topics</Button>
-      </Link>
-    </>
+    <Navbar bg="dark" data-bs-theme="dark">
+      <Container>
+        <Nav className="me-auto">
+          <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link href="/articles">Articles</Nav.Link>
+          <Nav.Link href="/topics">Topics</Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
   );
 };
 export default NavigationMenu;
