@@ -1,16 +1,12 @@
-import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
 import loki from '../assets/20180816_120800.jpg';
-import NavigationMenu from './components/NavigationMenu';
 
 const Homepage = () => {
   return (
     <section className="homepage">
-      <NavigationMenu />
-      <p>Hello world! Let's build a news site...</p>
+      <h1>Whispers on the Wind</h1>
       <p>
-        Loki is just making sure nothing untoward occurs in the homepage whilst
-        Toni builds the rest of the endpoints.
+        There's Whispers on the Wind all around us; this is just a site to
+        collect the most interesting ones for your viewing pleasure.
       </p>
       <img className="ph-img" src={loki} />
     </section>

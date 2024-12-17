@@ -53,11 +53,11 @@ const Articles = ({ baseURL }) => {
   return (
     <>
       <Link to="/">Click here to return to the homepage.</Link>
-      <ul className="articles-container">
+      <div className="grid-container">
         {articles.map((article) => (
           <ArticleCard article={article} key={article.article_id} />
         ))}
-      </ul>
+      </div>
     </>
   );
 };

@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
 import CommentList from './CommentList';
 import { Button } from 'react-bootstrap';
 
-const FocusArticle = ({ baseURL }) => {
+const FocusArticle = ({ baseURL, isLoggedIn }) => {
   const { article_id } = useParams();
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
   const [votes, setVotes] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -32,9 +33,14 @@ const FocusArticle = ({ baseURL }) => {
   }, [article_id, baseURL]);
 
   const handleVoteChange = async (inc_votes) => {
-    setLoading(true);
-    setError(false);
-
+    if (!isLoggedIn) {
+      alert('You must be logged in to vote.');
+      navigate('/');
+      return;
+    } else {
+      setLoading(true);
+      setError(false);
+    }
     try {
       const { data } = await axios.patch(`${baseURL}/articles/${article_id}`, {
         inc_votes,
@@ -96,11 +102,19 @@ const FocusArticle = ({ baseURL }) => {
       <p>{selectedArticle.body}</p>
       <h3>Votes: {votes}</h3>
       <section className="voting-buttons">
-        <Button onClick={() => handleVoteChange(1)}>Upvote</Button>
-        <Button onClick={() => handleVoteChange(-1)}>Downvote</Button>
+        <Button variant="outline-dark" onClick={() => handleVoteChange(1)}>
+          Upvote
+        </Button>
+        <Button variant="outline-dark" onClick={() => handleVoteChange(-1)}>
+          Downvote
+        </Button>
       </section>
       <h3>Comments: </h3>
-      <CommentList baseURL={baseURL} selectedArticle={selectedArticle} />
+      <CommentList
+        baseURL={baseURL}
+        selectedArticle={selectedArticle}
+        isLoggedIn={isLoggedIn}
+      />
     </section>
   );
 };
