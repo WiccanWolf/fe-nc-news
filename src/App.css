@@ -51,13 +51,25 @@
 }
 
 .login {
-  position: relative;
   margin-top: 15px;
+}
+
+#username-form,
+#password-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .related-articles {
   display: flex;
   margin-bottom: 10px;
+}
+
+.topic-title {
+  width: 18rem;
+  height: auto;
 }
 
 ol,
