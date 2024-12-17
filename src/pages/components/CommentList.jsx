@@ -20,10 +20,10 @@ const CommentList = ({ baseURL, selectedArticle }) => {
         setCommentList(
           Array.isArray(response.data.comments) ? response.data.comments : []
         );
-        console.log('🚀 ~ fetchCommentList ~ response.data:', response.data);
       } catch (err) {
         setError(true);
         console.error('Error retrieving Comments: ', err);
+        alert('Failed to retrieve comments, please try again.');
       } finally {
         setLoading(false);
       }
