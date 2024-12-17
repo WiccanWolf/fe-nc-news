@@ -8,14 +8,16 @@ const Topics = ({ baseURL }) => {
   const [isError, setError] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [topics, setTopics] = useState([]);
+  const [articles, setArticles] = useState([]);
   useEffect(() => {
-    const fetchTopics = async () => {
+    const fetchData = async () => {
       setLoading(true);
       setError(false);
       try {
-        const response = await axios.get(`${baseURL}/topics`);
-        setTopics(response.data.topic);
-        console.log(response.data.topic);
+        const topicResponse = await axios.get(`${baseURL}/topics`);
+        setTopics(topicResponse.data.topic);
+        const articleResponse = await axios.get(`${baseURL}/articles`);
+        setArticles(articleResponse.data.articles);
       } catch (err) {
         console.error('Error fetching Topics:', err);
         setError(true);
@@ -23,8 +25,8 @@ const Topics = ({ baseURL }) => {
         setLoading(false);
       }
     };
-    fetchTopics();
-  }, []);
+    fetchData();
+  }, [baseURL]);
 
   if (isLoading) {
     return (
@@ -63,7 +65,11 @@ const Topics = ({ baseURL }) => {
             topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1);
           return (
             <li key={topic.slug}>
-              <h1>{capitalisedSlug}</h1>
+              <Link to={`/topics/${topic.slug}`}>
+                <Button variant="outline-dark">
+                  <h1 className="topic-title">{capitalisedSlug}</h1>
+                </Button>
+              </Link>
               <p>{topic.description}</p>
             </li>
           );
