@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
-import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import NewComment from './NewComment';
 
 const CommentList = ({ baseURL, selectedArticle }) => {
   const [isError, setError] = useState(false);
@@ -76,7 +75,11 @@ const CommentList = ({ baseURL, selectedArticle }) => {
 
   return (
     <>
-      <Button onClick={handleNewComment}>New Comment</Button>
+      <NewComment
+        article_id={article_id}
+        baseURL={baseURL}
+        setCommentList={setCommentList}
+      />
       <ol>
         {commentList.map((comment) => (
           <li key={comment.comment_id}>
