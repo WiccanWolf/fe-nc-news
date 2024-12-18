@@ -28,8 +28,8 @@ const App = () => {
       <BrowserRouter>
         <NavigationMenu user={user} className="navigation" />
         <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="articles" element={<Articles baseURL={baseURL} />} />
+          <Route path="/" element={<Homepage baseURL={baseURL} />} />
+          <Route path="/articles" element={<Articles baseURL={baseURL} />} />
           <Route
             path="/articles/:article_id"
             element={
@@ -39,9 +39,9 @@ const App = () => {
               />
             }
           />
-          <Route path="topics" element={<Topics baseURL={baseURL} />} />
+          <Route path="/topics" element={<Topics baseURL={baseURL} />} />
           <Route
-            path="topics/:slug"
+            path="/topics/:slug"
             element={<TopicDetails baseURL={baseURL} />}
           />
           <Route

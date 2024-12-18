@@ -9,6 +9,7 @@ const ArticleCard = ({ article }) => {
           className="article-image"
           variant="top"
           src={article.article_img_url}
+          alt={`Thumbnail for the article ${article.title}`}
         />
         <Card.Body>
           <Card.Title>{article.title}</Card.Title>
