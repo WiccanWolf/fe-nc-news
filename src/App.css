@@ -14,7 +14,7 @@
 }
 @font-face {
   font-family: mallica;
-  src: url('src/assets/images/fonts/Mallica Fairytale.ttf');
+  src: url('/fonts/Mallica Fairytale.ttf'), url('/fonts/Mallica Fairytale.otf');
 }
 
 .topics {

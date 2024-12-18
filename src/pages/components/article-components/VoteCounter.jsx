@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import upvote from '../../../assets/images/vecteezy_thumbs-up-and-down-icon-eps-10_10737184.png';
-import downvote from '../../../assets/images/vecteezy_thumbs-up-and-down-icon-eps-10_10687926.png';
+import upvote from '/images/vecteezy_thumbs-up-and-down-icon-eps-10_10737184.png';
+import downvote from '/images/vecteezy_thumbs-up-and-down-icon-eps-10_10687926.png';
 import axios from 'axios';
 
 const VoteCounter = ({

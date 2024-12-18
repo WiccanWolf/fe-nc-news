@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import ConfusedMan from '../../../assets/images/—Pngtree—confused man concept_7418852.png';
+import ConfusedMan from '/images/—Pngtree—confused man concept_7418852.png';
 
 const NotFoundPage = ({ message = 'Page not found' }) => {
   return (

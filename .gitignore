@@ -25,3 +25,5 @@ dist-ssr
 
 src/pages/components/contexts/
 src/pages/components/ContextProvider.jsx
+# Local Netlify folder
+.netlify

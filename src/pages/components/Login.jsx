@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import defaultImage from '../../assets/images/20171206_01.jpg';
+import defaultImage from '/images/20171206_01.jpg';
 
 const Login = ({ setUser }) => {
   const [username, setUsername] = useState('');
