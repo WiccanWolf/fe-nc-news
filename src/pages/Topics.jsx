@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { ThreeDots } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
+import NotFoundPage from './components/error-handling-components/NotFoundPage';
 
 const Topics = ({ baseURL }) => {
   const [isError, setError] = useState(false);
@@ -45,7 +46,7 @@ const Topics = ({ baseURL }) => {
   }
 
   if (isError) {
-    return <p>Error loading topics. Please try again later.</p>;
+    return <NotFoundPage message="Topic not found" />;
   }
 
   if (!topics || topics.length === 0) {

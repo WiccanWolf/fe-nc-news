@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
+import { Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,19 +12,17 @@ const NewComment = ({
   setCommentList,
   isLoggedIn,
   username,
-  commentList,
 }) => {
   const [commentBody, setCommentBody] = useState('');
   const [isSubmitting, setSubmitting] = useState(false);
   const [isError, setError] = useState(false);
-  const [showMyComments, setShowMyComments] = useState(false);
 
   const navigate = useNavigate();
 
   const handleNewComment = async (e) => {
     if (!isLoggedIn) {
       alert('You must be logged in to comment.');
-      navigate('/');
+      navigate('/users/login');
       return;
     }
     e.preventDefault();
@@ -38,8 +37,8 @@ const NewComment = ({
         }
       );
       setCommentList((prevComments) => [
-        ...prevComments,
         response.data.comment,
+        ...prevComments,
       ]);
       setCommentBody('');
     } catch (err) {
@@ -49,32 +48,6 @@ const NewComment = ({
       setSubmitting(false);
     }
   };
-
-  const handleDeleteComment = async (commentId) => {
-    if (!isLoggedIn) {
-      alert('You must be logged in to delete comments.');
-      navigate('/');
-      return;
-    }
-    try {
-      await axios.delete(`${baseURL}comments/${commentId}`);
-      setCommentList((prevComments) =>
-        prevComments.filter((comment) => comment.comment_id !== commentId)
-      );
-      alert('Comment deleted.');
-    } catch (err) {
-      setError(true);
-      console.error('Error deleting comment: ', err);
-    }
-  };
-
-  const handleShowMyComments = () => {
-    setShowMyComments((prevState) => !prevState);
-  };
-
-  const filteredComments = showMyComments
-    ? commentList.filter((comment) => comment.author === username)
-    : commentList;
 
   return (
     <div>
@@ -93,30 +66,21 @@ const NewComment = ({
         <Button type="submit" variant="outline-dark" disabled={isSubmitting}>
           {isSubmitting ? 'Submitting Comment. Please wait.' : 'Submit Comment'}
         </Button>
-        {isError && <p>Error submitting comment. Please try again later.</p>}
+        {isError && (
+          <Alert variant="warning">
+            <Alert.Heading>Error submitting your comment.</Alert.Heading>
+            <p>
+              There was an error while submitting your comment. Please check if
+              the comment body is empty or try again later.
+            </p>
+            <hr />
+            <Alert.Link href="/users/login">
+              Please Note: Only logged in Users may vote and comment on
+              articles.
+            </Alert.Link>
+          </Alert>
+        )}
       </Form>
-
-      <Button variant="outline-dark" onClick={handleShowMyComments}>
-        {showMyComments ? 'Show All Comments' : 'Show My Comments'}
-      </Button>
-
-      <h3>Comments</h3>
-      <ol>
-        {filteredComments.map((comment) => (
-          <li key={comment.comment_id}>
-            <h4>{comment.author}</h4>
-            <p>{comment.body}</p>
-            {comment.author === username && (
-              <Button
-                variant="danger"
-                onClick={() => handleDeleteComment(comment.comment_id)}
-              >
-                Delete
-              </Button>
-            )}
-          </li>
-        ))}
-      </ol>
     </div>
   );
 };

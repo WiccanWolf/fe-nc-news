@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button, Form, Collapse } from 'react-bootstrap';
+import defaultImage from '../../assets/20171206_01.jpg';
 
 const Login = ({ setUser }) => {
   const [username, setUsername] = useState('');
@@ -22,7 +23,7 @@ const Login = ({ setUser }) => {
       localStorage.setItem('username', username);
 
       setUser({ username });
-      window.location.href = '/';
+      window.location.href = '/users/login';
     } else {
       setError(true);
       throw new Error('Invalid Credentials');
@@ -43,67 +44,48 @@ const Login = ({ setUser }) => {
   if (token && usernameInStorage) {
     return (
       <>
-        <Button
-          onClick={() => setOpen(!open)}
-          aria-controls="open-login-form"
-          aria-expanded={open}
-          variant="outline-dark"
-        >
-          {open ? 'Hide Logout Option' : 'Show Logout Option'}
-        </Button>
-        <Collapse in={open}>
-          <div className="login">
-            <h4>Welcome, {usernameInStorage}</h4>
-            <Button variant="outline-dark" onClick={handleLogout}>
-              Logout
-            </Button>
-          </div>
-        </Collapse>
+        <div className="login">
+          <h4>Welcome, {usernameInStorage}</h4>
+          <img src={defaultImage} className="user-image" />
+          <Button variant="outline-dark" onClick={handleLogout}>
+            Logout
+          </Button>
+        </div>
       </>
     );
   }
 
   return (
     <>
-      <Button
-        onClick={() => setOpen(!open)}
-        aria-controls="open-login-form"
-        aria-expanded={open}
-        variant="outline-dark"
-      >
-        {open ? 'Hide Login Menu' : 'Show Login Menu'}
-      </Button>
-      <Collapse in={open}>
-        <div className="login">
-          <h2>Login</h2>
-          <Form onSubmit={handleLogin}>
-            <section id="username-form">
-              <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              ></input>
-            </section>
-            <section id="password-form">
-              <label htmlFor="password">Password</label>
-              <input
-                type="text"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              ></input>
-            </section>
-            {isError && <p>{error}</p>}
-            <Button type="submit" variant="outline-dark" disabled={isLoading}>
-              {isLoading ? 'Logging in...' : 'Login'}
-            </Button>
-          </Form>
-        </div>
-      </Collapse>
+      <div className="login">
+        <h2>Login</h2>
+        <Form onSubmit={handleLogin}>
+          <section id="username-form">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            ></input>
+          </section>
+          <section id="password-form">
+            <label htmlFor="password">Password</label>
+            <input
+              type="text"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            ></input>
+          </section>
+          {isError && <p>{error}</p>}
+          <Button type="submit" variant="outline-dark" disabled={isLoading}>
+            {isLoading ? 'Logging in...' : 'Login'}
+          </Button>
+        </Form>
+      </div>
     </>
   );
 };

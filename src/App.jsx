@@ -1,14 +1,15 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Homepage from './pages/Homepage';
 import Articles from './pages/Articles';
-import FocusArticle from './pages/components/FocusArticle';
 import Topics from './pages/Topics';
-import { useEffect, useState } from 'react';
 import Login from './pages/components/Login';
 import NavigationMenu from './pages/components/NavigationMenu';
-import TopicDetails from './pages/components/TopicDetails';
+import FocusArticle from './pages/components/article-components/FocusArticle';
+import TopicDetails from './pages/components/topic-components/TopicDetails';
+import NotFoundPage from './pages/components/error-handling-components/NotFoundPage';
 
 const baseURL = 'https://the-wolves-den.onrender.com/api/';
 
@@ -25,8 +26,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-        <NavigationMenu className="navigation" />
-        <Login className="login" setUser={setUser} />
+        <NavigationMenu user={user} className="navigation" />
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="articles" element={<Articles baseURL={baseURL} />} />
@@ -44,6 +44,11 @@ const App = () => {
             path="topics/:slug"
             element={<TopicDetails baseURL={baseURL} />}
           />
+          <Route
+            path="/users/login"
+            element={<Login className="login" setUser={setUser} />}
+          />
+          <Route path="*" element={NotFoundPage} />
         </Routes>
       </BrowserRouter>
     </div>

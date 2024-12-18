@@ -1,8 +1,9 @@
 import axios from 'axios';
-import ArticleCard from './components/ArticleCard';
 import { useEffect, useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import { Form } from 'react-bootstrap';
+import ArticleCard from './components/article-components/ArticleCard';
+import NotFoundPage from './components/error-handling-components/NotFoundPage';
 
 const Articles = ({ baseURL }) => {
   const [articles, setArticles] = useState([]);
@@ -50,7 +51,7 @@ const Articles = ({ baseURL }) => {
   };
 
   if (isError) {
-    return <p>Error loading Articles. Please try refreshing this page.</p>;
+    return <NotFoundPage message="Article not found" />;
   }
 
   if (isLoading) {
