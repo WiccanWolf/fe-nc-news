@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Button, Form, Collapse } from 'react-bootstrap';
-import defaultImage from '../../assets/20171206_01.jpg';
+import { Button, Form } from 'react-bootstrap';
+import defaultImage from '../../assets/images/20171206_01.jpg';
 
 const Login = ({ setUser }) => {
   const [username, setUsername] = useState('');
@@ -45,8 +45,12 @@ const Login = ({ setUser }) => {
     return (
       <>
         <div className="login">
-          <h4>Welcome, {usernameInStorage}</h4>
-          <img src={defaultImage} className="user-image" />
+          <h3>Welcome, {usernameInStorage}</h3>
+          <img
+            alt="profile-picture"
+            src={defaultImage}
+            className="user-image"
+          />
           <Button variant="outline-dark" onClick={handleLogout}>
             Logout
           </Button>

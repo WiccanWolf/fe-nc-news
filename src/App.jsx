@@ -28,7 +28,7 @@ const App = () => {
       <BrowserRouter>
         <NavigationMenu user={user} className="navigation" />
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/" element={<Homepage baseURL={baseURL} />} />
           <Route path="articles" element={<Articles baseURL={baseURL} />} />
           <Route
             path="/articles/:article_id"

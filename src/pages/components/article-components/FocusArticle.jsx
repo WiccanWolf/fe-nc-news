@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
 import CommentList from '../comment-components/CommentList';
@@ -11,7 +11,6 @@ const FocusArticle = ({ baseURL, isLoggedIn }) => {
   const [selectedArticle, setSelectedArticle] = useState({});
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchArticle = async () => {

@@ -76,17 +76,21 @@ const Articles = ({ baseURL }) => {
 
   return (
     <>
+      <h1 className="articles">Articles</h1>
       <section>
-        <Form.Select
-          size="sm"
-          onChange={(e) => handleSortCriteria(e.target.value)}
-        >
-          <option>Sort Articles by...</option>
-          <option value="title">Title</option>
-          <option value="votes">Popularity</option>
-          <option value="created_at">Date Created</option>
-          <option value="author">Author</option>
-        </Form.Select>
+        <Form>
+          <Form.Select
+            size="sm"
+            onChange={(e) => handleSortCriteria(e.target.value)}
+            aria-label="sort-criteria"
+          >
+            <option>Sort Articles by...</option>
+            <option value="title">Title</option>
+            <option value="votes">Popularity</option>
+            <option value="created_at">Date Created</option>
+            <option value="author">Author</option>
+          </Form.Select>
+        </Form>
         <div className="grid-container">
           {(sortedArticles.length > 0 ? sortedArticles : articles).map(
             (article) => (

@@ -101,7 +101,7 @@ const CommentList = ({ baseURL, selectedArticle, isLoggedIn }) => {
         {showUserComments ? 'Show All Comments' : 'Show My Comments'}
       </button>
 
-      <ol>
+      <ol className="comment-section">
         {(showUserComments ? userComments : allComments).map((comment) => (
           <li key={comment.comment_id}>
             <h4>{comment.author}</h4>

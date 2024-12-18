@@ -59,7 +59,8 @@ const Topics = ({ baseURL }) => {
   }
 
   return (
-    <section>
+    <section className="topics">
+      <h1>Topics</h1>
       <ul>
         {topics.map((topic) => {
           const capitalisedSlug =
@@ -68,7 +69,7 @@ const Topics = ({ baseURL }) => {
             <li key={topic.slug}>
               <Link to={`/topics/${topic.slug}`}>
                 <Button variant="outline-dark">
-                  <h1 className="topic-title">{capitalisedSlug}</h1>
+                  <h2 className="topic-title">{capitalisedSlug}</h2>
                 </Button>
               </Link>
               <p>{topic.description}</p>

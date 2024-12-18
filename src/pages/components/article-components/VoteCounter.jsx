@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import upvote from '../../../assets/images/vecteezy_thumbs-up-and-down-icon-eps-10_10737184.png';
+import downvote from '../../../assets/images/vecteezy_thumbs-up-and-down-icon-eps-10_10687926.png';
 import axios from 'axios';
 
 const VoteCounter = ({
@@ -58,14 +60,22 @@ const VoteCounter = ({
             onClick={() => handleVoteChange(1)}
             disabled={currentVote === 1}
           >
-            Upvote
+            <img
+              alt="A thumbs up icon. Increase Vote count."
+              className="icon"
+              src={upvote}
+            />
           </Button>
           <Button
             variant="outline-dark"
             onClick={() => handleVoteChange(-1)}
             disabled={currentVote === -1}
           >
-            Downvote
+            <img
+              alt="A thumbs down icon. Decrease Vote count."
+              className="icon"
+              src={downvote}
+            />
           </Button>
         </>
       )}
