@@ -46,12 +46,23 @@
   width: 100%;
 }
 
+.error-image {
+  width: 500px;
+}
+
 .ph-img {
   width: 25%;
 }
 
 .login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-top: 15px;
+  img {
+    width: 360px;
+  }
 }
 
 #username-form,

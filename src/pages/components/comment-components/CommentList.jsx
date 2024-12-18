@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
 import NewComment from './NewComment';
+import { Button } from 'react-bootstrap';
 
 const CommentList = ({ baseURL, selectedArticle, isLoggedIn }) => {
   const [isError, setError] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [commentList, setCommentList] = useState([]);
+  const [showUserComments, setShowUserComments] = useState(false);
   const article_id = selectedArticle.article_id;
 
   useEffect(() => {
@@ -61,6 +63,7 @@ const CommentList = ({ baseURL, selectedArticle, isLoggedIn }) => {
   if (commentList.length === 0) {
     return <p>No comments available for this article.</p>;
   }
+
   const britishify = (date) => {
     let options = {
       weekday: 'short',
@@ -73,6 +76,12 @@ const CommentList = ({ baseURL, selectedArticle, isLoggedIn }) => {
     return new Date(date).toLocaleString('en-GB', options);
   };
 
+  const userComments = commentList.filter(
+    (comment) => comment.author === localStorage.getItem('username')
+  );
+
+  const allComments = commentList;
+
   return (
     <>
       <NewComment
@@ -81,15 +90,54 @@ const CommentList = ({ baseURL, selectedArticle, isLoggedIn }) => {
         setCommentList={setCommentList}
         isLoggedIn={isLoggedIn}
         username={localStorage.getItem('username')}
-        commentList={commentList}
+        commentList={userComments}
       />
+
+      <h3>Comments</h3>
+      <button
+        onClick={() => setShowUserComments((prevState) => !prevState)}
+        className="btn btn-outline-dark"
+      >
+        {showUserComments ? 'Show All Comments' : 'Show My Comments'}
+      </button>
+
       <ol>
-        {commentList.map((comment) => (
+        {(showUserComments ? userComments : allComments).map((comment) => (
           <li key={comment.comment_id}>
             <h4>{comment.author}</h4>
             <p>{comment.body}</p>
             <p>Votes: {comment.votes}</p>
             <p>Created At: {britishify(comment.created_at)}</p>
+            {comment.author === localStorage.getItem('username') && (
+              <Button
+                variant="outline-danger"
+                onClick={async (comment_id) => {
+                  if (!isLoggedIn) {
+                    alert('You must be logged in to delete comments.');
+                    navigate('/users/login');
+                    return;
+                  }
+                  try {
+                    await axios.delete(
+                      `${baseURL}comments/${comment.comment_id}`
+                    );
+                    setCommentList((prevComments) =>
+                      prevComments.filter(
+                        (comment) => comment.comment_id !== comment_id
+                      )
+                    );
+                    alert(
+                      'Comment deleted. Please refresh the page to update.'
+                    );
+                  } catch (err) {
+                    setError(true);
+                    console.error('Error deleting comment: ', err);
+                  }
+                }}
+              >
+                Delete
+              </Button>
+            )}
           </li>
         ))}
       </ol>

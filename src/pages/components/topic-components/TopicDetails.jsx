@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { ThreeDots } from 'react-loader-spinner';
+import NotFoundPage from '../error-handling-components/NotFoundPage';
 
 const TopicDetails = ({ baseURL }) => {
   const { slug } = useParams();
@@ -53,7 +54,7 @@ const TopicDetails = ({ baseURL }) => {
   }
 
   if (isError) {
-    return <p>Error loading topic details. Please try again later.</p>;
+    return <NotFoundPage message="Topic not found" />;
   }
 
   if (!topic) {

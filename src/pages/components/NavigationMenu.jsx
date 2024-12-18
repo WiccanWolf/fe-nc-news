@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
 
-const NavigationMenu = () => {
+const NavigationMenu = ({ user }) => {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
@@ -8,6 +8,7 @@ const NavigationMenu = () => {
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/articles">Articles</Nav.Link>
           <Nav.Link href="/topics">Topics</Nav.Link>
+          <Nav.Link href="/users/login">Login Page</Nav.Link>
         </Nav>
       </Container>
     </Navbar>
