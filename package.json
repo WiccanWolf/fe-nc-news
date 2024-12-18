@@ -13,6 +13,7 @@
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "react": "^18.2.0",
+    "react-admin": "^5.4.2",
     "react-bootstrap": "^2.10.7",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^6.1.6"
