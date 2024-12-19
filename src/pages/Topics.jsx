@@ -9,7 +9,7 @@ const Topics = ({ baseURL }) => {
   const [isError, setError] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [topics, setTopics] = useState([]);
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState([]); // Valud is not being used.
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);

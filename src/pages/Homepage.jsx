@@ -6,10 +6,12 @@ import { ThreeDots } from 'react-loader-spinner';
 
 const Homepage = ({ baseURL = '/api' }) => {
   const [articles, setArticles] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false); // Create new loading component.
 
   useEffect(() => {
     const fetchArticles = async () => {
+      // Best practice to not have sorting logic in Frontend <--- Backend/PSQL would be better.
+      // Add a specific endpoint to make the request for the homepage.
       setLoading(true);
       try {
         const response = await axios.get(`${baseURL}articles`);

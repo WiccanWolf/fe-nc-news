@@ -11,7 +11,8 @@ import FocusArticle from './pages/components/article-components/FocusArticle';
 import TopicDetails from './pages/components/topic-components/TopicDetails';
 import NotFoundPage from './pages/components/error-handling-components/NotFoundPage';
 
-const baseURL = 'https://the-wolves-den.onrender.com/api/';
+const baseURL = 'https://the-wolves-den.onrender.com/api/'; // Axios instancing; App.jsx to give this elsewhere.
+// Move API logic to seperate file.
 
 const App = () => {
   const [user, setUser] = useState({});

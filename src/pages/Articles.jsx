@@ -6,15 +6,15 @@ import ArticleCard from './components/article-components/ArticleCard';
 import NotFoundPage from './components/error-handling-components/NotFoundPage';
 
 const Articles = ({ baseURL }) => {
-  const [articles, setArticles] = useState([]);
-  const [sortedArticles, setSortedArticles] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [articles, setArticles] = useState([]); // Shouldn't need both states VVV
+  const [sortedArticles, setSortedArticles] = useState([]); // Unneeded <--- Can use first Articles
+  const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
-  const [sortCriteria, setSortCriteria] = useState('created_at');
+  const [sortCriteria, setSortCriteria] = useState('created_at'); // Use sortCriteria to set URL Queries. Do in backend as Frontend sorting isn't best practice.
 
   useEffect(() => {
-    setLoading(true);
-    setError(false);
+    setLoading(true); // May not be needed.
+    setError(false); // May not be needed.
     axios
       .get(`${baseURL}/articles`)
       .then(({ data }) => {
@@ -27,7 +27,7 @@ const Articles = ({ baseURL }) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [baseURL]);
+  }, [baseURL]); // Should also include sortCriteria.
 
   const sortAllArticles = (articles, sort_by) => {
     return [...articles].sort((a, b) => {
@@ -71,7 +71,7 @@ const Articles = ({ baseURL }) => {
   }
 
   if (articles.length === 0) {
-    return <p>No Articles Available.</p>;
+    return <p>No Articles Available.</p>; // Put this in an error handling Component. Optimistically this never gets hit.
   }
 
   return (
@@ -79,6 +79,7 @@ const Articles = ({ baseURL }) => {
       <h1 className="articles">Articles</h1>
       <section>
         <Form>
+          {/*Can move into a child component*/}
           <Form.Select
             size="sm"
             onChange={(e) => handleSortCriteria(e.target.value)}

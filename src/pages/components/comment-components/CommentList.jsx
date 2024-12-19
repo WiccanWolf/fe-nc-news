@@ -20,7 +20,7 @@ const CommentList = ({ baseURL, selectedArticle, isLoggedIn }) => {
           `${baseURL}/articles/${article_id}/comments`
         );
         setCommentList(
-          Array.isArray(response.data.comments) ? response.data.comments : []
+          Array.isArray(response.data.comments) ? response.data.comments : [] // Look into as shouldn't be required.
         );
       } catch (err) {
         setError(true);
@@ -77,6 +77,7 @@ const CommentList = ({ baseURL, selectedArticle, isLoggedIn }) => {
   };
 
   const userComments = commentList.filter(
+    // Add an endpoint to do this.
     (comment) => comment.author === localStorage.getItem('username')
   );
 

@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
 
-const NavigationMenu = ({ user }) => {
+const NavigationMenu = () => {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>

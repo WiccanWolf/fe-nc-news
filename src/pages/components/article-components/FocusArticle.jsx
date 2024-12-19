@@ -29,6 +29,7 @@ const FocusArticle = ({ baseURL, isLoggedIn }) => {
   }, [article_id, baseURL]);
 
   if (isLoading) {
+    // Loading and Error can be in separate components. Pass the state down as a prop.
     return (
       <div className="loading-container">
         <ThreeDots
@@ -57,10 +58,10 @@ const FocusArticle = ({ baseURL, isLoggedIn }) => {
 
   return (
     <section>
+      {/*Can use the specific <article/> tag.*/}
       <h1>{selectedArticle.title}</h1>
       <img src={selectedArticle.article_img_url} alt={selectedArticle.title} />
       <p>{selectedArticle.body}</p>
-
       <VoteCounter
         baseURL={baseURL}
         article_id={article_id}
@@ -68,7 +69,6 @@ const FocusArticle = ({ baseURL, isLoggedIn }) => {
         userVote={selectedArticle.user_vote || 'none'}
         isLoggedIn={isLoggedIn}
       />
-
       <h3>Comments: </h3>
       <CommentList
         baseURL={baseURL}

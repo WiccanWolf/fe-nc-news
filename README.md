@@ -20,7 +20,7 @@ Functionality includes;
 Both repositories for this project can be found at my GitHub;
 
 - [Frontend](https://github.com/WiccanWolf/fe-nc-news)
-- [Backend](https://github.com/WiccanWolf/tonis-nc-news)
+- [Backend](https://github.com/WiccanWolf/tonis-nc-news) / [Databse](https://the-wolves-den.onrender.com/api)
 
 To run this code locally, do the following (note, you will need at least Node v22.9.0);
 

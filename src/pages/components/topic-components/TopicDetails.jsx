@@ -11,8 +11,9 @@ const TopicDetails = ({ baseURL }) => {
   const [isError, setError] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [topic, setTopic] = useState([]);
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState([]); // Value is not used.
   const [relatedArticles, setRelatedArticles] = useState([]);
+  // Can add the grid option for the  articles here.
 
   useEffect(() => {
     const fetchTopicDetails = async () => {
@@ -24,6 +25,7 @@ const TopicDetails = ({ baseURL }) => {
         const articleResponse = await axios.get(`${baseURL}articles`);
         setArticles(articleResponse.data.articles);
         const filteredArticles = articleResponse.data.articles.filter(
+          // Api can handle this much like before.
           (article) => article.topic === topicResponse.data.topic[0].slug
         );
         setRelatedArticles(filteredArticles);
@@ -64,12 +66,13 @@ const TopicDetails = ({ baseURL }) => {
   return (
     <section>
       <h1>{topic.slug}</h1>
-      <p>{topic.description}</p>
-      <h3>Related Articles</h3>
+      {/*Have a look as to when this can be accessed. Can use ternery / && ()*/}
+      <h2>Related Articles</h2>
       <ul>
-        {relatedArticles.length > 0 ? (
+        {relatedArticles.length > 0 ? ( // Can be handled in API.
           relatedArticles.map((article) => (
             <li key={article.article_id}>
+              {/*Could have <TopicCard /> instead of a rendered list.*/}
               <Link to={`/articles/${article.article_id}`}>
                 <Button
                   className="related-articles"
