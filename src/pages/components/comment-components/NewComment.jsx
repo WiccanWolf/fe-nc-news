@@ -30,6 +30,7 @@ const NewComment = ({
     setError(false);
     try {
       const response = await axios.post(
+        // Refer to App.jsx comments.
         `${baseURL}articles/${article_id}/comments`,
         {
           author: username,
@@ -37,7 +38,7 @@ const NewComment = ({
         }
       );
       setCommentList((prevComments) => [
-        response.data.comment,
+        response.data.comment, // Ideally just have {comment}
         ...prevComments,
       ]);
       setCommentBody('');
