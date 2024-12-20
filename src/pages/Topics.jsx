@@ -49,15 +49,6 @@ const Topics = ({ baseURL }) => {
     return <NotFoundPage message="Topic not found" />;
   }
 
-  if (!topics || topics.length === 0) {
-    return (
-      <>
-        <p>No Topics Found</p>
-        <Link to="/">Back to Homepage</Link>
-      </>
-    );
-  }
-
   return (
     <section className="topics">
       <h1>Topics</h1>
